@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>notes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="notes">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="notes">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="notes">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="notes" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -33,7 +33,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">notes</a>
       </h1>
       
     </div>
@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -61,19 +61,84 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-angular 学习" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-docker-环境配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/17/angular 学习/" class="article-date">
-  <time datetime="2017-03-17T09:00:13.000Z" itemprop="datePublished">2017-03-17</time>
+    <a href="/2017/03/19/docker-环境配置/" class="article-date">
+  <time datetime="2017-03-19T04:24:02.000Z" itemprop="datePublished">2017-03-19</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/19/docker-环境配置/">docker 环境配置</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p>angular_demo 项目里的一些改动和思考：<br>由于是angular初学者，把后台的请求部分也放在了controller里面。<br>这样对于一个单页的web_app，或者数据规模比较小的项目没有什么影响。但是，这样是不符合controller的最佳实践的。</p>
+        <p>##Docker环境配置</p>
+<p>Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同，Docker直接运行在操作系统之上，而不是硬件层。<br>虽然是操作系统层上的虚拟机实现，但是也实现了资源隔离，同时也因此具有比较好的性能，一般来说，容器的启动一般在1秒左右。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">docker:</div><div class="line">container   Manage containers</div><div class="line">image       Manage images</div><div class="line">network     Manage networks</div><div class="line">node        Manage Swarm nodes</div><div class="line">plugin      Manage plugins</div><div class="line">secret      Manage Docker secrets</div><div class="line">service     Manage services</div><div class="line">stack       Manage Docker stacks</div><div class="line">swarm       Manage Swarm</div><div class="line">system      Manage Docker</div><div class="line">volume      Manage volumes</div></pre></td></tr></table></figure>
+<p>OSX下可以下载到最新的<a href="src=&quot;https://www.docker.com/docker-mac&quot;">docker</a></p>
+<p>docker具有统一管理的镜像仓库，支持将软件编译成一个image，在image中进行配置后发布，使用者可以通过从repository中下载镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker pull  image-name     </div><div class="line">docker push  image-name</div></pre></td></tr></table></figure></p>
+<p>可以上传和下载仓库中的镜像。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker search redis</div></pre></td></tr></table></figure>
+<p>从远程仓库搜索redis 镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NAME      DESCRIPTION      STARS     OFFICIAL   AUTOMATED</div><div class="line">redis      Redis is...     3516      [OK]</div></pre></td></tr></table></figure>
+<p>下载官方镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull redis</div></pre></td></tr></table></figure>
+<p>删除镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rmi image-id</div></pre></td></tr></table></figure>
+<p>通过  docker run [image-name] 可以根据镜像启动一个容器，容器是镜像的一个实例，在启动时可以指定容器名，可以查看已经启动的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name myredis -d -P redis</div></pre></td></tr></table></figure></p>
+<p>-d 表示<figure class="highlight plain"><figcaption><span>[host-port]:[container-port]```来进行端口映射。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
+<p>docker ps [-a]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可以查看容器，默认只显示运行中的容器。 如果没有前台进程，那么容器就会自动退出。也可以通过```stop```指令停止容器,```rm```可以删除一个已停止的容器，如果想强制退出，可以用```docker rm -f</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker stop [container-name]/[container-id]</div><div class="line">docker rm [container-name]/[container-id]</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/19/docker-环境配置/" data-id="cj0g6hlop00006f3yqgga0zc2" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-angular学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/angular学习/" class="article-date">
+  <time datetime="2017-03-17T04:12:22.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/17/angular学习/">angualr_JS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>angular_demo 项目里的一些改动：<br>由于是angular初学者，把后台的请求部分也放在了controller里面。<br>这样对于一个单页的web_app，或者数据规模比较小的项目没有什么影响。但是，这样是不符合controller的最佳实践的。</p>
 <p>controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。<br>如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。</p>
 <p>controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM操作，格式化数据的操作。<br>控制器的正确操作是：将一个独立view相关的业务操作封装在一起，具体的业务操作可以封装在service里，然后通过依赖注入进来。<br>这样控制器可以随时销毁。</p>
 <p>同样的，在绑定关于在$scope上绑定数据的时候，一些注意事项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1：</div><div class="line">   $scope.data = 10;</div><div class="line"></div><div class="line">2：</div><div class="line">   $scope.model = &#123;</div><div class="line">       data : 10</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
@@ -96,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/17/angular 学习/" data-id="cj0g67cwe0000nu3ysbqih409" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/17/angular学习/" data-id="cj0g6iqsz0000703y1gt8l49z" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -115,9 +180,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/docker/" style="font-size: 10px;">docker</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -131,12 +210,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2017/03/17/angular 学习/">(no title)</a>
+            <a href="/2017/03/19/docker-环境配置/">docker 环境配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/17/angular学习/">angualr_JS</a>
           </li>
         
       </ul>
@@ -151,8 +234,8 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 yunyi fan<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
