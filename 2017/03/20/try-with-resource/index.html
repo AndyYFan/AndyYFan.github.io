@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>try with resource | notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##Java中关闭资源的正常方式&amp;amp; try with resource
+Java中关闭资源的方式：
+123456789101112131415161718192021//不正确的做法：private void readTheFile() throws IOException &amp;#123;  Path path = Paths.get(this.fileName);  BufferedRea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="try with resource">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/try-with-resource/index.html">
+<meta property="og:site_name" content="notes">
+<meta property="og:description" content="##Java中关闭资源的正常方式&amp;amp; try with resource
+Java中关闭资源的方式：
+123456789101112131415161718192021//不正确的做法：private void readTheFile() throws IOException &amp;#123;  Path path = Paths.get(this.fileName);  BufferedRea">
+<meta property="og:updated_time" content="2017-03-20T08:18:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="try with resource">
+<meta name="twitter:description" content="##Java中关闭资源的正常方式&amp;amp; try with resource
+Java中关闭资源的方式：
+123456789101112131415161718192021//不正确的做法：private void readTheFile() throws IOException &amp;#123;  Path path = Paths.get(this.fileName);  BufferedRea">
+  
+    <link rel="alternate" href="/atom.xml" title="notes" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">notes</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-try-with-resource" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/20/try-with-resource/" class="article-date">
+  <time datetime="2017-03-20T07:13:37.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      try with resource
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Java中关闭资源的正常方式&amp; try with resource</p>
+<p>Java中关闭资源的方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//不正确的做法：</div><div class="line">private void readTheFile() throws IOException &#123;</div><div class="line">  Path path = Paths.get(this.fileName);</div><div class="line">  BufferedReader reader = Files.newBufferedReader(path, this.charset)) &#123;</div><div class="line">  // ...</div><div class="line">  reader.close();  // Noncompliant</div><div class="line">&#125;</div><div class="line"></div><div class="line">private void doSomething() &#123;</div><div class="line">  OutputStream stream = null;</div><div class="line">  try &#123;</div><div class="line">    for (String property : propertyList) &#123;</div><div class="line">      stream = new FileOutputStream(&quot;myfile.txt&quot;);  // Noncompliant</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    stream.close(); </div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在循环中打开了多个流，但是只有最后一个是被正确关闭的。</p>
+<p>正确的做法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">private void readTheFile() throws IOException &#123;</div><div class="line">  Path path = Paths.get(this.fileName);</div><div class="line">  BufferedReader reader = null;</div><div class="line">  try &#123;</div><div class="line">    reader = Files.newBufferedReader(path, this.charset)) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    if (reader != null) &#123;</div><div class="line">      reader.close();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">private void doSomething() &#123;</div><div class="line">  OutputStream stream = null;</div><div class="line">  try &#123;</div><div class="line">    stream = new FileOutputStream(&quot;myfile.txt&quot;);</div><div class="line">    for (String property : propertyList) &#123;</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    stream.close();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在Java7 中还有一种try with resource 的写法， 更紧凑一些， 可以通过try()请求资源，这个资源可以不用显示的声明关闭：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">try(JedisPool pool = new JedisPool(</div><div class="line">	new JedisPoolConfig(),</div><div class="line">	 &quot;localhost&quot;))&#123;</div><div class="line">            try (Jedis jedis = pool.getResource()) &#123;</div><div class="line">            //...</div><div class="line">  			&#125;</div><div class="line">            pool.destroy();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/20/try-with-resource/" data-id="cj0hubl120001kv3yoyg5fqmd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/19/docker-环境配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">docker 环境配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/docker/" style="font-size: 10px;">docker</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/20/try-with-resource/">try with resource</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/docker-环境配置/">docker 环境配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/17/angular学习/">angualr_JS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 yunyi fan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
