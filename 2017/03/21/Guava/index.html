@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Guava不可变集合类 | notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="##Guava 不可变集合最近使用了Guava这个库，其中的collection对于日常的Java开发简化了很多，当然也包括了其他很多包括缓存，IO，原型支持，并发等一系列的特性。主要的一些特性包括：避免使用了null, 简化实现Object方法，比如hashCode()和toString()，更好的异常处理。
+Guava的Collections包括一些不可变集合，还包括一些新的集合类型如：mul">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Guava不可变集合类">
+<meta property="og:url" content="http://yoursite.com/2017/03/21/Guava/index.html">
+<meta property="og:site_name" content="notes">
+<meta property="og:description" content="##Guava 不可变集合最近使用了Guava这个库，其中的collection对于日常的Java开发简化了很多，当然也包括了其他很多包括缓存，IO，原型支持，并发等一系列的特性。主要的一些特性包括：避免使用了null, 简化实现Object方法，比如hashCode()和toString()，更好的异常处理。
+Guava的Collections包括一些不可变集合，还包括一些新的集合类型如：mul">
+<meta property="og:updated_time" content="2017-03-22T11:15:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Guava不可变集合类">
+<meta name="twitter:description" content="##Guava 不可变集合最近使用了Guava这个库，其中的collection对于日常的Java开发简化了很多，当然也包括了其他很多包括缓存，IO，原型支持，并发等一系列的特性。主要的一些特性包括：避免使用了null, 简化实现Object方法，比如hashCode()和toString()，更好的异常处理。
+Guava的Collections包括一些不可变集合，还包括一些新的集合类型如：mul">
+  
+    <link rel="alternate" href="/atom.xml" title="notes" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">notes</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Guava" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/Guava/" class="article-date">
+  <time datetime="2017-03-21T06:19:49.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Guava不可变集合类
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Guava 不可变集合<br>最近使用了<a href="https://github.com/google/guava" target="_blank" rel="external">Guava</a>这个库，其中的collection对于日常的Java开发简化了很多，当然也包括了其他很多包括缓存，IO，原型支持，并发等一系列的特性。<br>主要的一些特性包括：<br>避免使用了null, 简化实现Object方法，比如<code>hashCode()</code>和<code>toString()</code>，更好的异常处理。</p>
+<p>Guava的Collections包括一些不可变集合，还包括一些新的集合类型如：multisets, multimaps, tables, bidirectional maps…<br>而且对Collections的扩展更方便，比如实现Iterator的方式更简单了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public static final ImmutableSet&lt;String&gt; COLOR_NAMES = ImmutableSet.of(</div><div class="line">  &quot;red&quot;,</div><div class="line">  &quot;orange&quot;,</div><div class="line">  &quot;yellow&quot;,</div><div class="line">  &quot;green&quot;,</div><div class="line">  &quot;blue&quot;,</div><div class="line">  &quot;purple&quot;);</div><div class="line"></div><div class="line">class Foo &#123;</div><div class="line">  final ImmutableSet&lt;Bar&gt; bars;</div><div class="line">  Foo(Set&lt;Bar&gt; bars) &#123;</div><div class="line">    this.bars = ImmutableSet.copyOf(bars); // defensive copy!</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ImmutableSet可以保证安全调用，并且避免了多线程是资源竞争的问题，使用时可以作为一个常量来处理。</p>
+<p>Collections.unmodifiable 虽然也有类似的实现，但是只有当没有对这个集合类的引用的时候它才是真的安全的。</p>
+<p>所以当我们不想改变一个集合的时候，可以用ImmutableXXX.copyOf 保护性的拷贝给一个Immutable 集合类。</p>
+<p>在使用ImmutableSet.of()初始化一个不可变集合的时候，在构造时就是有序的，<code>ImmutableSet.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;a&quot;, &quot;d&quot;, &quot;b&quot;)</code>顺序读取后会返回 “a”, “b”, “c”, “d”。</p>
+<p>Immutable. copyOf()会提供自动的类型转换，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ImmutableSet&lt;String&gt; foobar = ImmutableSet.of(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;);</div><div class="line">thingamajig(foobar);</div><div class="line"></div><div class="line">void thingamajig(Collection&lt;String&gt; collection) &#123;</div><div class="line">   ImmutableList&lt;String&gt; defensiveCopy = ImmutableList.copyOf(collection);</div><div class="line">   ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果调用 <code>ImmutableList.copyOf(foobar)</code>会自动的返回<code>foobar.asList()</code>，把ImmutableSet转换为ImmutableList，不过由于数据结构的关系，这种转化无法在O(1)时间内完成。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/21/Guava/" data-id="cj0kvi0mr0000tf3y6y9czhvx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/21/Spring-Framework/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring Bean Scope</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL/">NoSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NoSQL/" style="font-size: 10px;">NoSQL</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/21/Guava/">Guava不可变集合类</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/Spring-Framework/">Spring Bean Scope</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/20/Exception-translation/">Exception translation</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/20/redis/">Redis 初学</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/20/try-with-resource/">try with resource</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 yunyi fan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

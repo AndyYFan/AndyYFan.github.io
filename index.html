@@ -61,6 +61,172 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Guava" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/Guava/" class="article-date">
+  <time datetime="2017-03-21T06:19:49.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/21/Guava/">Guava不可变集合类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Guava 不可变集合<br>最近使用了<a href="https://github.com/google/guava" target="_blank" rel="external">Guava</a>这个库，其中的collection对于日常的Java开发简化了很多，当然也包括了其他很多包括缓存，IO，原型支持，并发等一系列的特性。<br>主要的一些特性包括：<br>避免使用了null, 简化实现Object方法，比如<code>hashCode()</code>和<code>toString()</code>，更好的异常处理。</p>
+<p>Guava的Collections包括一些不可变集合，还包括一些新的集合类型如：multisets, multimaps, tables, bidirectional maps…<br>而且对Collections的扩展更方便，比如实现Iterator的方式更简单了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public static final ImmutableSet&lt;String&gt; COLOR_NAMES = ImmutableSet.of(</div><div class="line">  &quot;red&quot;,</div><div class="line">  &quot;orange&quot;,</div><div class="line">  &quot;yellow&quot;,</div><div class="line">  &quot;green&quot;,</div><div class="line">  &quot;blue&quot;,</div><div class="line">  &quot;purple&quot;);</div><div class="line"></div><div class="line">class Foo &#123;</div><div class="line">  final ImmutableSet&lt;Bar&gt; bars;</div><div class="line">  Foo(Set&lt;Bar&gt; bars) &#123;</div><div class="line">    this.bars = ImmutableSet.copyOf(bars); // defensive copy!</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ImmutableSet可以保证安全调用，并且避免了多线程是资源竞争的问题，使用时可以作为一个常量来处理。</p>
+<p>Collections.unmodifiable 虽然也有类似的实现，但是只有当没有对这个集合类的引用的时候它才是真的安全的。</p>
+<p>所以当我们不想改变一个集合的时候，可以用ImmutableXXX.copyOf 保护性的拷贝给一个Immutable 集合类。</p>
+<p>在使用ImmutableSet.of()初始化一个不可变集合的时候，在构造时就是有序的，<code>ImmutableSet.of(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;a&quot;, &quot;d&quot;, &quot;b&quot;)</code>顺序读取后会返回 “a”, “b”, “c”, “d”。</p>
+<p>Immutable. copyOf()会提供自动的类型转换，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ImmutableSet&lt;String&gt; foobar = ImmutableSet.of(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;);</div><div class="line">thingamajig(foobar);</div><div class="line"></div><div class="line">void thingamajig(Collection&lt;String&gt; collection) &#123;</div><div class="line">   ImmutableList&lt;String&gt; defensiveCopy = ImmutableList.copyOf(collection);</div><div class="line">   ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果调用 <code>ImmutableList.copyOf(foobar)</code>会自动的返回<code>foobar.asList()</code>，把ImmutableSet转换为ImmutableList，不过由于数据结构的关系，这种转化无法在O(1)时间内完成。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/21/Guava/" data-id="cj0kvi0mr0000tf3y6y9czhvx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Spring-Framework" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/21/Spring-Framework/" class="article-date">
+  <time datetime="2017-03-21T05:58:08.000Z" itemprop="datePublished">2017-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/21/Spring-Framework/">Spring Bean Scope</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##Spring Bean Scope<br>As a rule, use the prototype scope for all state-full beans and the singleton scope for stateless beans.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/21/Spring-Framework/" data-id="cj0kvklhb0000xw3y109e6qh5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Exception-translation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/20/Exception-translation/" class="article-date">
+  <time datetime="2017-03-20T09:06:30.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/20/Exception-translation/">Exception translation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当在DAO中使用Hibernate，JPA，JDO时，要处理一些持久层技术的原生异常类型，比如<code>HibernateException</code>,<code>PersistenceException</code>,<code>JDOException</code>，取决于使用哪种持久层技术。这些运行时的异常不用声明或者catch。Spring提供了一种透明的异常类型转译的方法，通过<code>@Repository</code>注解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Repository</div><div class="line">public class ProductDaoImpl implements ProductDao &#123;</div><div class="line">   // class body here...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;beans&gt;</div><div class="line"></div><div class="line">   &lt;!-- Exception translation bean post processor --&gt;</div><div class="line">   &lt;bean class=&quot;org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor&quot;/&gt;</div><div class="line"></div><div class="line">   &lt;bean id=&quot;myProductDao&quot; class=&quot;product.ProductDaoImpl&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
+<p>预处理器<code>ersistenceExceptionTranslationPostProcessor</code>会自动的扫描到所有的异常转译类，这些类都实现了<code>PersistenceExceptionTranslator</code>接口，并且会根据<code>@Repository</code>注解的DAO类的抛出异常选择恰当的异常处理方式。</p>
+<p>当然我们可以不用选择定制直接使用原本的exception translator，但这对理解Spring的ORM技术是有帮助的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/20/Exception-translation/" data-id="cj0ksxkhi0000ml3ymkhknlbu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-redis" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/20/redis/" class="article-date">
+  <time datetime="2017-03-20T08:40:18.000Z" itemprop="datePublished">2017-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/20/redis/">Redis 初学</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###什么是Redis？<br>Redis是一个key-value的数据库，和memcached类似，但是除了可以存储String类型之外，还可以存储lists，sets,和ordered sets,这些数据类型可以通过原子的push/pop来操作，还包括add/remove, union，intersection，求集合不同，等等操作都是原子操作。</p>
+<p>###Jedis<br>Jedis数据库连接池：<br><code>JedisPool pool = new JedisPool(new JedisPoolConfig(), &quot;localhost&quot;);</code><br>也可以声明成静态对象，这是线程安全的。<br>JedisPool 基于Commons Pool 2 所以可以通过和Commons Pool类似的方式配置。<br>在实际应用中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">   try(Jedis jedis  = pool.getResource())&#123;</div><div class="line">   //...</div><div class="line">&#125;</div><div class="line">pool.destroy();</div></pre></td></tr></table></figure></p>
+<p>Redis 提供主从复制的机制，一个已经声明的Jedis连接实例可以通过两种方式声明主从关系<br>一种是通过xml配置文件的方式，另外一种是直接通过<code>jedis.slaveOf(&quot;host_name&quot;,&quot;port&quot;)</code>声明。<br>从Redis2.6开始从数据库默认是只读的，写需求会报错。就算修改从的设置，写请求不会备份，而且会被重写覆盖。<br>当主机down掉后，可以把从机改成master，可以通过<code>slave.slaveOfNoOne()</code>修改slave成为master，如果有不止一台slave，其他slave要通过<code>slaveOf</code>修改主从关系。</p>
+<p>###SDR(Spring Data Redis)<br>SDR提供了很高层的抽象，所以可以很方便的使用redis。<br>使用Redis的第一步是通过IoC容器连接redis数据库。一般是<code>org.springframework.data.redis.connection</code>这个包。<code>RedisConnection</code>提供了和Redis交互的句柄，也可以把Redis的异常信息转换成Spring的<code>consistent DAO exception hierarchy</code>。<br><code>RedisConnection</code>通过<code>RedisConnectionFactory</code>来生成，这个工厂方法有类似于<code>PersistenceExceptionTranslator</code>的作用</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/20/redis/" data-id="cj0ksxkhu0003ml3yp5phdnao" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NoSQL/">NoSQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-try-with-resource" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/20/try-with-resource/" class="article-date">
@@ -96,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/20/try-with-resource/" data-id="cj0hubl120001kv3yoyg5fqmd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/20/try-with-resource/" data-id="cj0ksxkhz0005ml3y0cm7se6l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -149,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/19/docker-环境配置/" data-id="cj0hubl140002kv3y8a2o7yxj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/19/docker-环境配置/" data-id="cj0ksxkhr0002ml3ysl7wt52j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
@@ -206,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/17/angular学习/" data-id="cj0hubl0y0000kv3yftxs1ghg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/17/angular学习/" data-id="cj0ksxkho0001ml3y6n89wnqo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,7 +394,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoSQL/">NoSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li></ul>
     </div>
   </div>
 
@@ -238,7 +404,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/docker/" style="font-size: 10px;">docker</a>
+      <a href="/tags/NoSQL/" style="font-size: 10px;">NoSQL</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a>
     </div>
   </div>
 
@@ -260,15 +426,23 @@
       <ul>
         
           <li>
+            <a href="/2017/03/21/Guava/">Guava不可变集合类</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/21/Spring-Framework/">Spring Bean Scope</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/20/Exception-translation/">Exception translation</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/20/redis/">Redis 初学</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/20/try-with-resource/">try with resource</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/19/docker-环境配置/">docker 环境配置</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/17/angular学习/">angualr_JS</a>
           </li>
         
       </ul>
