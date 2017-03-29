@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Spring Bean Scope | notes</title>
+  <title>rabbitmq | notes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##Spring Bean ScopeAs a rule, use the prototype scope for all state-full beans and the singleton scope for stateless beans.">
+  <meta name="description" content="异步消息异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Bean Scope">
-<meta property="og:url" content="http://yoursite.com/2017/03/21/Spring-Framework/index.html">
+<meta property="og:title" content="rabbitmq">
+<meta property="og:url" content="http://yoursite.com/2017/03/26/rabbitmq/index.html">
 <meta property="og:site_name" content="notes">
-<meta property="og:description" content="##Spring Bean ScopeAs a rule, use the prototype scope for all state-full beans and the singleton scope for stateless beans.">
-<meta property="og:updated_time" content="2017-03-22T11:17:38.000Z">
+<meta property="og:description" content="异步消息异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的">
+<meta property="og:updated_time" content="2017-03-26T09:28:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Bean Scope">
-<meta name="twitter:description" content="##Spring Bean ScopeAs a rule, use the prototype scope for all state-full beans and the singleton scope for stateless beans.">
+<meta name="twitter:title" content="rabbitmq">
+<meta name="twitter:description" content="异步消息异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的">
   
     <link rel="alternate" href="/atom.xml" title="notes" type="application/atom+xml">
   
@@ -63,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Spring-Framework" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-rabbitmq" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/21/Spring-Framework/" class="article-date">
-  <time datetime="2017-03-21T05:58:08.000Z" itemprop="datePublished">2017-03-21</time>
+    <a href="/2017/03/26/rabbitmq/" class="article-date">
+  <time datetime="2017-03-26T08:36:22.000Z" itemprop="datePublished">2017-03-26</time>
 </a>
     
   </div>
@@ -77,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Spring Bean Scope
+      rabbitmq
     </h1>
   
 
@@ -85,12 +85,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##Spring Bean Scope<br>As a rule, use the prototype scope for all state-full beans and the singleton scope for stateless beans.</p>
+        <hr>
+<h2 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h2><p>异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。<br>异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的消息通信。<br>queue确保每条消息有唯一的发送者和接收者，topic可以有多个消息接收者共同监听主题。<br>企业级的消息代理实现由JMS和AMQP两种规范，后者兼容JMS并且夸语言平台，所以AMQP得使用比较广泛，RabbitMQ是AMQP规范的一种消息代理实现。</p>
+<p></p><h3>RabbitMQ</h3><br>RabbitMQ里也有上面说到的基本的异步消息概念，多做了一层抽象, 在Producer和queue之间, 加入了交换器 (Exchange)。使Producer和queue解耦，交换器根据调度策略把消息给队列。<br>从而衍生除了几个重要的概念:<p></p>
+<ul>
+<li>VirtualHost</li>
+<li>Exchange</li>
+<li>binding</li>
+</ul>
+<p>virtual host是用户在RabbitMQ中权限控制的最小粒度，多个虚拟主机可以方便管理消息之间的权限问题，一个virtual host有一组exchange, queue, binding. 这样不同的virtual host之间是不能访问对方的消息的。</p>
+<p>Exchange只转发，不存储，每个exchange都bind到一个或多个queue，如果没有bind，exchange会直接丢弃消息。</p>
+<p></p><h3>RabbitMQ Java api</h3><br>RabbitMQ的Java client 的项目结构：<br>顶层是<code>com.rabbitmq.client</code>,包含了一些主要的接口：<p></p>
+<ul>
+<li>Channel  </li>
+<li>Connection</li>
+<li>ConnectionFactory</li>
+<li>Consumer</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/21/Spring-Framework/" data-id="cj0v07fq10001he3yt48vd8uq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/26/rabbitmq/" data-id="cj0v07fqf0006he3y3v7u50cx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -99,19 +115,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/03/21/Guava/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Guava不可变集合类
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/20/Exception-translation/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/03/21/Guava/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Exception translation</div>
+      <div class="article-nav-title">Guava不可变集合类</div>
     </a>
   
 </nav>

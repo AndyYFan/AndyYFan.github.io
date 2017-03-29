@@ -61,6 +61,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-rabbitmq" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/26/rabbitmq/" class="article-date">
+  <time datetime="2017-03-26T08:36:22.000Z" itemprop="datePublished">2017-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/26/rabbitmq/">rabbitmq</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h2><p>异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。<br>异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的消息通信。<br>queue确保每条消息有唯一的发送者和接收者，topic可以有多个消息接收者共同监听主题。<br>企业级的消息代理实现由JMS和AMQP两种规范，后者兼容JMS并且夸语言平台，所以AMQP得使用比较广泛，RabbitMQ是AMQP规范的一种消息代理实现。</p>
+<p></p><h3>RabbitMQ</h3><br>RabbitMQ里也有上面说到的基本的异步消息概念，多做了一层抽象, 在Producer和queue之间, 加入了交换器 (Exchange)。使Producer和queue解耦，交换器根据调度策略把消息给队列。<br>从而衍生除了几个重要的概念:<p></p>
+<ul>
+<li>VirtualHost</li>
+<li>Exchange</li>
+<li>binding</li>
+</ul>
+<p>virtual host是用户在RabbitMQ中权限控制的最小粒度，多个虚拟主机可以方便管理消息之间的权限问题，一个virtual host有一组exchange, queue, binding. 这样不同的virtual host之间是不能访问对方的消息的。</p>
+<p>Exchange只转发，不存储，每个exchange都bind到一个或多个queue，如果没有bind，exchange会直接丢弃消息。</p>
+<p></p><h3>RabbitMQ Java api</h3><br>RabbitMQ的Java client 的项目结构：<br>顶层是<code>com.rabbitmq.client</code>,包含了一些主要的接口：<p></p>
+<ul>
+<li>Channel  </li>
+<li>Connection</li>
+<li>ConnectionFactory</li>
+<li>Consumer</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/26/rabbitmq/" data-id="cj0v07fqf0006he3y3v7u50cx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Guava" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/21/Guava/" class="article-date">
@@ -97,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/21/Guava/" data-id="cj0kvi0mr0000tf3y6y9czhvx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/21/Guava/" data-id="cj0v07fpx0000he3yqhy2l6z5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/21/Spring-Framework/" data-id="cj0kvklhb0000xw3y109e6qh5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/21/Spring-Framework/" data-id="cj0v07fq10001he3yt48vd8uq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -175,7 +228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/20/Exception-translation/" data-id="cj0ksxkhi0000ml3ymkhknlbu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/20/Exception-translation/" data-id="cj0v07fq40002he3ytrvtweif" class="article-share-link">Share</a>
       
       
     </footer>
@@ -215,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/20/redis/" data-id="cj0ksxkhu0003ml3yp5phdnao" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/20/redis/" data-id="cj0v07fqh0008he3y5xdwrw2l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NoSQL/">NoSQL</a></li></ul>
@@ -262,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/20/try-with-resource/" data-id="cj0ksxkhz0005ml3y0cm7se6l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/20/try-with-resource/" data-id="cj0v07fqg0007he3y444d44s3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -315,7 +368,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/19/docker-环境配置/" data-id="cj0ksxkhr0002ml3ysl7wt52j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/19/docker-环境配置/" data-id="cj0v07fq50003he3ynhff57fr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
@@ -372,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/17/angular学习/" data-id="cj0ksxkho0001ml3y6n89wnqo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/17/angular学习/" data-id="cj0v07fq60004he3y595jp21c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -426,6 +479,10 @@
       <ul>
         
           <li>
+            <a href="/2017/03/26/rabbitmq/">rabbitmq</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/21/Guava/">Guava不可变集合类</a>
           </li>
         
@@ -439,10 +496,6 @@
         
           <li>
             <a href="/2017/03/20/redis/">Redis 初学</a>
-          </li>
-        
-          <li>
-            <a href="/2017/03/20/try-with-resource/">try with resource</a>
           </li>
         
       </ul>
