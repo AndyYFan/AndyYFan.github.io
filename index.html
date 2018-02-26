@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/01/dom-jquery/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/17/Gradle 3.4 和Idea的一个Bug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yunyi fan">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/01/dom-jquery/" itemprop="url">dom&jquery</a></h1>
+                <a class="post-title-link" href="/2017/09/17/Gradle 3.4 和Idea的一个Bug/" itemprop="url">Gradle 3.4 与IDEA 的一个问题</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-01T12:36:36+08:00">
-                2017-10-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-17T12:01:12+08:00">
+                2017-09-17
               </time>
             
 
@@ -330,10 +330,15 @@
       
         
           
-            <p>最近在工作中重构了之前的一个项目的前端部分，因为之前并没有很丰富的前端开发基础，所以决定直接使用jquery来进行开发。</p>
-<p>在开发过程中，发现之前的代码并没有做模块化的处理，只是把一些公用的方法抽离出来了而已，可维护性很差。并且由于一两个文件的逻辑比较复杂，比较复杂，所以考虑重构代码。</p>
-<p>因为之前维护过代码，所以在划分代码逻辑块的时候并没有很多难度。</p>
-<p>ES6中支持在String中插入变量</p>
+            <p><a href="https://github.com/gradle/gradle/issues/1276" target="_blank" rel="external">https://github.com/gradle/gradle/issues/1276</a></p>
+<p>the problem only happens with the “Create Module per SourceSet” option. This does not use Gradle’s mapping directly, but has some intermediate code contributed by IDEA. It seems this code <a href="https://github.com/JetBrains/intellij-community/blob/master/plugins/gradle/tooling-extension-impl/src/org/jetbrains/plugins/gradle/tooling/util/DependencyResolverImpl.groovy#L473" target="_blank" rel="external">removes dependencies that are in multiple scopes</a></p>
+<p>with the “Create Module per SourceSet” option IDEA tries to resolve dependency scopes based on gradle sourceSet configuration. And the main scopes here are <code>compile</code> and <code>runtime</code>.<br><code>provided</code> scope has been considered as something configured explicitly:</p>
+<ol>
+<li>using War Plugin conventions (i.e. <code>providedCompile</code> and <code>providedRuntime</code> configurations)</li>
+<li>using workaround provided by <code>IdeaPlugin</code>, I mean ideaPlugin.model.module.scopes[‘PROVIDED’].[‘plus’] option.</li>
+</ol>
+<p>In order to honor the second configuration, I had to increase the priority of explicitly configured <code>provided</code> dependencies.</p>
+<p>Cause is<br><code>JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME</code> configuration as <code>provided</code> by default.</p>
 
           
         
