@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="angular_demo 项目里的一些改动：由于是angular初学者，把后台的请求部分也放在了controller里面。这样对于一个单页的web_app，或者数据规模比较小的项目没有什么影响。但是，这样是不符合controller的最佳实践的。
-controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。如果一个control">
+<meta name="description" content="angualr Js 的 controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。
+controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM操作，格式化数据的操作。控制器的正确操作是：将一个独立view相关的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angualr_JS">
 <meta property="og:url" content="https://andyyfan.github.io/2017/03/17/angular学习/index.html">
 <meta property="og:site_name" content="技术笔记">
-<meta property="og:description" content="angular_demo 项目里的一些改动：由于是angular初学者，把后台的请求部分也放在了controller里面。这样对于一个单页的web_app，或者数据规模比较小的项目没有什么影响。但是，这样是不符合controller的最佳实践的。
-controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。如果一个control">
-<meta property="og:updated_time" content="2018-02-26T15:36:46.166Z">
+<meta property="og:description" content="angualr Js 的 controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。
+controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM操作，格式化数据的操作。控制器的正确操作是：将一个独立view相关的">
+<meta property="og:updated_time" content="2018-02-28T15:33:25.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angualr_JS">
-<meta name="twitter:description" content="angular_demo 项目里的一些改动：由于是angular初学者，把后台的请求部分也放在了controller里面。这样对于一个单页的web_app，或者数据规模比较小的项目没有什么影响。但是，这样是不符合controller的最佳实践的。
-controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。如果一个control">
+<meta name="twitter:description" content="angualr Js 的 controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。
+controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM操作，格式化数据的操作。控制器的正确操作是：将一个独立view相关的">
 
 
 
@@ -114,7 +114,7 @@ controller从使用上来说，可以看做是一个增强的view。在声明一
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Mist',
     sidebar: {"position":"left","display":"always","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
@@ -324,6 +324,28 @@ controller从使用上来说，可以看做是一个增强的view。在声明一
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端学习/" itemprop="url" rel="index">
+                    <span itemprop="name">前端学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -351,25 +373,15 @@ controller从使用上来说，可以看做是一个增强的view。在声明一
       
 
       
-        <p>angular_demo 项目里的一些改动：<br>由于是angular初学者，把后台的请求部分也放在了controller里面。<br>这样对于一个单页的web_app，或者数据规模比较小的项目没有什么影响。但是，这样是不符合controller的最佳实践的。</p>
-<p>controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。<br>如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。</p>
+        <p>angualr Js 的 controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。<br>如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。</p>
 <p>controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM操作，格式化数据的操作。<br>控制器的正确操作是：将一个独立view相关的业务操作封装在一起，具体的业务操作可以封装在service里，然后通过依赖注入进来。<br>这样控制器可以随时销毁。</p>
-<p>同样的，在绑定关于在$scope上绑定数据的时候，一些注意事项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1：</div><div class="line">   $scope.data = 10;</div><div class="line"></div><div class="line">2：</div><div class="line">   $scope.model = &#123;</div><div class="line">       data : 10</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
-<p>我原本一直使用的是 1 里的写法，直到遇到一个问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// JS </div><div class="line">angular.module(&apos;myApp&apos;,[])</div><div class="line">       .controller(&apos;parentCtrl&apos;,ParentController);</div><div class="line">       .controller(&apos;childCtrl&apos;,ChildController);</div><div class="line">// ....</div><div class="line">function ParentController($scope)&#123;</div><div class="line">    $scope.name = 10;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">//....     </div><div class="line"></div><div class="line">function ChildController($scope)&#123;</div><div class="line">    $scope.name = 20;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我在html中定义了两个控制器，childCtrl是parentCtrl 的子controller。</p>
-<p>child应当是继承parent的值的，但是发现改变parent并不会影响child的值。<br>说明在JS复制对象的时候对于字符串类型 是copy value  而不是 reference。<br>而如果声明成一个对象，就是reference copy了。</p>
+<p>在绑定关于在$scope上绑定数据的时候，一些注意事项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1：</div><div class="line">   $scope.data = 10;</div><div class="line"></div><div class="line">2：</div><div class="line">   $scope.model = &#123;</div><div class="line">       data : 10</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>1是错误的做法，考虑一个场景：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// JS </div><div class="line">angular.module(&apos;myApp&apos;,[])</div><div class="line">       .controller(&apos;parentCtrl&apos;,ParentController);</div><div class="line">       .controller(&apos;childCtrl&apos;,ChildController);</div><div class="line">// ....</div><div class="line">function ParentController($scope)&#123;</div><div class="line">    $scope.name = 10;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">//....     </div><div class="line"></div><div class="line">function ChildController($scope)&#123;</div><div class="line">    $scope.name = 20;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在html中定义了两个控制器，childCtrl是parentCtrl 的子controller，child 的值parent的值绑定。<br>但是改变parent之后，并不会影响child的值。<br>这是由于JavaScript中对于基本数据类型采用了值拷贝的方式，<br>如果需要维持这种数据绑定关系，那么在AngularJs中就不能将数据类型声明为基本数据类型。<br>所以在这里把name声明成一个对象，就可以在上下文中通过引用拷贝修改这个对象的属性。</p>
 <p>对于angular的service也有一些值得注意的地方。<br>首先是service 的生存周期问题，service 是一个Singleton的对象。<br>对于一个webapp，只会被$injector实例化一次。这个service的加载概念有点类似于Spring里的DI，不过<br>在angular里叫做 懒加载，其实和DI是一回事情。</p>
 <p>在Spring里加载service 也是通过工厂方法，angular里提供了一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">module.factory(&apos;SericeName&apos;,[dependency])</div></pre></td></tr></table></figure></p>
 <p>这个service和Spring里的 服务层做的事情其实是差不多的，包括请求数据，处理业务逻辑。 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"> angular.module(&apos;myApp.Services&apos;,[])</div><div class="line">        .factory(&apos;myService&apos;,ServiceFunc);</div><div class="line"> ServiceFunc = function($http)&#123;</div><div class="line">     //....</div><div class="line">     var local = &#123;</div><div class="line">         data : 10</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     var getdata = function($http)&#123;</div><div class="line">         //...</div><div class="line">         return  httpdata;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     return&#123;</div><div class="line">         data: local</div><div class="line">         get : getdata</div><div class="line">     &#125;</div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个工厂方法返回的是一个对象，就是这个myService类，我们可以定义自己的方法和参数。</p>
-<p>除此之外还需要提一下 异步的问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">(function()&#123;</div><div class="line">    &apos;use strict&apos;;</div><div class="line"></div><div class="line">    angular</div><div class="line">        .module(&apos;myApp.services&apos;,[])</div><div class="line">        .factory(&apos;fileService&apos;, Factory)</div><div class="line"></div><div class="line">    /** @ngInject */</div><div class="line">    function Factory($http,$q)&#123;</div><div class="line">         var restUrl = &quot;http://localhost:8888/test&quot;;</div><div class="line">         var defer = $q.defer();</div><div class="line">         var promise= defer.promise;</div><div class="line">        var getMessages = function()&#123;</div><div class="line">            </div><div class="line">            $http.get(restUrl).success(function(data)&#123;</div><div class="line">               defer.resolve(data);</div><div class="line">            &#125;).error(function(data)&#123;</div><div class="line">               defer.reject(data);</div><div class="line">            &#125;);</div><div class="line">            return promise;</div><div class="line">        &#125;;</div><div class="line">        return &#123;</div><div class="line">            getAll:getMessages</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;());</div></pre></td></tr></table></figure></p>
-<p>可以看到在这里对于promise请求的处理。我对于JavaScript原理了解有限，在JS的设计中，<br>经常会看到callback的出现，说明JS语言对于异步的处理，如果我们要对于一个http Request 做异步处理应该怎么办呢？</p>
-<p>首先是ajax：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">var request = new XMLHttpRequest(); // 新建XMLHttpRequest对象</div><div class="line"></div><div class="line">request.onreadystatechange = function () &#123; // 状态发生变化时，函数被回调</div><div class="line">    if (request.readyState === 4) &#123; // 成功完成</div><div class="line">        // 判断响应结果:</div><div class="line">        if (request.status === 200) &#123;</div><div class="line">            // 成功，通过responseText拿到响应的文本:</div><div class="line">            return success(request.responseText);</div><div class="line">        &#125; else &#123;</div><div class="line">            // 失败，根据响应码判断失败原因:</div><div class="line">            return fail(request.status);</div><div class="line">        &#125;</div><div class="line">    &#125; else &#123;</div><div class="line">        // HTTP请求还在继续...</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 发送请求:</div><div class="line">request.open(&apos;GET&apos;, &apos;/api/categories&apos;);</div><div class="line">request.send();</div><div class="line"></div><div class="line">alert(&apos;请求已发送，请等待响应...&apos;);</div></pre></td></tr></table></figure></p>
-<p>可以看到这种写法包含了很多逻辑判断语句，而且代码不是很紧凑,如果再加上一些业务逻辑，<br>那么整个代码的可读性很差。</p>
-<p>所以还有一种链式的写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var ajax = ajaxGet(&apos;http://...&apos;);</div><div class="line">ajax.ifSuccess(success)</div><div class="line">    .ifFail(fail);</div></pre></td></tr></table></figure>
-<p>这种对象叫做Promise对象，在ES6里基本都支持了。</p>
 
       
     </div>
@@ -476,12 +488,21 @@ controller从使用上来说，可以看做是一个增强的view。在声明一
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
           
 
           
@@ -489,7 +510,7 @@ controller从使用上来说，可以看做是一个增强的view。在声明一
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -546,7 +567,7 @@ controller从使用上来说，可以看做是一个增强的view。在声明一
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Gemini
+    NexT.Mist
   </a>
 </div>
 
@@ -625,13 +646,6 @@ controller从使用上来说，可以看做是一个增强的view。在声明一
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>

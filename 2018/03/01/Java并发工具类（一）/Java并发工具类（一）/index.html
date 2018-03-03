@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="并发," />
 
 
 
@@ -94,16 +94,28 @@
 
 
 
-<meta name="description" content="异步消息异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的">
+<meta name="description" content="一、CountDownLatch简介CountDownLatch(CDL)是idk 1.5 中的java 并发同步类， 可以控制多线程在某个计数器为零前通过await()阻塞线程。CDL中主要方法包括 
+1. 获取当前计数的get方法
+2. 对象初始化的方法（因为没有set方法，countDown值为0后方法不能重用）
+3. countDown方法，将当前的计数器减1.
+二、 应用示例：12345">
 <meta property="og:type" content="article">
-<meta property="og:title" content="rabbitmq">
-<meta property="og:url" content="https://andyyfan.github.io/2017/03/26/rabbitmq/index.html">
+<meta property="og:title" content="CountDownLatch">
+<meta property="og:url" content="https://andyyfan.github.io/2018/03/01/Java并发工具类（一）/Java并发工具类（一）/index.html">
 <meta property="og:site_name" content="技术笔记">
-<meta property="og:description" content="异步消息异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的">
-<meta property="og:updated_time" content="2017-04-02T09:33:44.000Z">
+<meta property="og:description" content="一、CountDownLatch简介CountDownLatch(CDL)是idk 1.5 中的java 并发同步类， 可以控制多线程在某个计数器为零前通过await()阻塞线程。CDL中主要方法包括 
+1. 获取当前计数的get方法
+2. 对象初始化的方法（因为没有set方法，countDown值为0后方法不能重用）
+3. countDown方法，将当前的计数器减1.
+二、 应用示例：12345">
+<meta property="og:updated_time" content="2018-03-03T13:05:56.028Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="rabbitmq">
-<meta name="twitter:description" content="异步消息异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的">
+<meta name="twitter:title" content="CountDownLatch">
+<meta name="twitter:description" content="一、CountDownLatch简介CountDownLatch(CDL)是idk 1.5 中的java 并发同步类， 可以控制多线程在某个计数器为零前通过await()阻塞线程。CDL中主要方法包括 
+1. 获取当前计数的get方法
+2. 对象初始化的方法（因为没有set方法，countDown值为0后方法不能重用）
+3. countDown方法，将当前的计数器减1.
+二、 应用示例：12345">
 
 
 
@@ -132,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="https://andyyfan.github.io/2017/03/26/rabbitmq/"/>
+  <link rel="canonical" href="https://andyyfan.github.io/2018/03/01/Java并发工具类（一）/Java并发工具类（一）/"/>
 
 
 
 
 
-  <title>rabbitmq | 技术笔记</title>
+  <title>CountDownLatch | 技术笔记</title>
   
 
 
@@ -281,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://andyyfan.github.io/2017/03/26/rabbitmq/">
+    <link itemprop="mainEntityOfPage" href="https://andyyfan.github.io/2018/03/01/Java并发工具类（一）/Java并发工具类（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yunyi fan">
@@ -298,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">rabbitmq</h1>
+          <h1 class="post-title" itemprop="name headline">CountDownLatch</h1>
         
 
         <div class="post-meta">
@@ -310,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-26T16:36:22+08:00">
-                2017-03-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-01T20:56:50+08:00">
+                2018-03-01
               </time>
             
 
@@ -320,6 +332,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java基础/" itemprop="url" rel="index">
+                    <span itemprop="name">java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -348,30 +382,14 @@
       
 
       
-        <hr>
-<h2 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h2><p>异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。<br>异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的消息通信。<br>queue确保每条消息有唯一的发送者和接收者，topic可以有多个消息接收者共同监听主题。<br>企业级的消息代理实现由JMS和AMQP两种规范，后者兼容JMS并且夸语言平台，所以AMQP得使用比较广泛，RabbitMQ是AMQP规范的一种消息代理实现。</p>
-<p></p><h3>RabbitMQ</h3><br>RabbitMQ里也有上面说到的基本的异步消息概念，多做了一层抽象, 在Producer和queue之间, 加入了交换器 (Exchange)。使Producer和queue解耦，交换器根据调度策略把消息给队列。<br>从而衍生除了几个重要的概念:<p></p>
-<ul>
-<li>VirtualHost</li>
-<li>Exchange</li>
-<li>binding</li>
-</ul>
-<p>virtual host是用户在RabbitMQ中权限控制的最小粒度，多个虚拟主机可以方便管理消息之间的权限问题，一个virtual host有一组exchange, queue, binding. 这样不同的virtual host之间是不能访问对方的消息的。</p>
-<p>Exchange只转发，不存储，每个exchange都bind到一个或多个queue，如果没有bind，exchange会直接丢弃消息。当开启ack模式之后，</p>
-<p></p><h3>RabbitMQ Java api</h3><br>RabbitMQ的Java client 的项目结构：<br>顶层是<code>com.rabbitmq.client</code>,包含了一些主要的接口：<p></p>
-<ul>
-<li>Channel  </li>
-<li>Connection</li>
-<li>ConnectionFactory</li>
-<li>Consumer</li>
-</ul>
-<p>如何使用Exchange 和 Queue<br>客户端应用在使用AMQP的高层抽象exchange和queue前必须声明。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">channel.exchangeDecalare((exchangeName, &quot;direct&quot;, true);</div><div class="line">String queueName = channel.queueDeclare().getQueue();</div><div class="line">channel.queueBind(queueName,exchange,exchangeName,routingKey);</div></pre></td></tr></table></figure>
-<p>在这里通过声明一个可复用的direct类型的exchange和一个自动删除的不可复用的队列。然后通过<code>queueBind</code>来绑定exchange和queue。<br><code>channel.queueDeclare(queueName, true, false, false, null);</code>可以声明一个可复用不自动删除的队列。</p>
-<p>Channels 的线程安全<br><code>Channel</code>实例不能为线程间共享，由于channel的操作有些是线程安全，而有些不是，所以应用应当采用每个线程一个channel实例的方式。<br><code>client</code>下的<code>Consumer</code>,接口。</p>
-<p>相同的Channel的不同的Consumer必须具有不同的consumer 标签。</p>
-<p><code>DefaultConsumer</code>是Consumer下的一个简单的实现类，</p>
-
+        <h3 id="一、CountDownLatch简介"><a href="#一、CountDownLatch简介" class="headerlink" title="一、CountDownLatch简介"></a>一、CountDownLatch简介</h3><p>CountDownLatch(CDL)是idk 1.5 中的java 并发同步类， 可以控制多线程在某个计数器为零前通过await()阻塞线程。CDL中主要方法包括 </p>
+<p>1. 获取当前计数的get方法</p>
+<p>2. 对象初始化的方法（因为没有set方法，countDown值为0后方法不能重用）</p>
+<p>3. countDown方法，将当前的计数器减1.</p>
+<h3 id="二、-应用示例："><a href="#二、-应用示例：" class="headerlink" title="二、 应用示例："></a>二、 应用示例：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * </div><div class="line"> * 👇下面是使用countDownLatch的一个示例，得到的输出为：</div><div class="line">start!!</div><div class="line">work-thread-0: start executing</div><div class="line">work-thread-3: start executing</div><div class="line">work-thread-4: start executing</div><div class="line">work-thread-1: start executing</div><div class="line">work-thread-2: start executing</div><div class="line"> * */</div><div class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</div><div class="line">ThreadFactory threadFactory = <span class="keyword">new</span> ThreadFactoryBuilder().setNameFormat(<span class="string">"work-thread-%d"</span>).build();</div><div class="line">ExecutorService service = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">5</span>,<span class="number">5</span>,</div><div class="line">  <span class="number">1000L</span>,TimeUnit.MILLISECONDS,</div><div class="line">  <span class="keyword">new</span> LinkedBlockingQueue(<span class="number">10</span>),</div><div class="line">  threadFactory);</div><div class="line">CountDownLatch cnt = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);   <span class="comment">//设置了一个初始计数为1的CDL</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">  service.execute(() -&gt; &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">  cnt.await();</div><div class="line">  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">  e.printStackTrace();</div><div class="line">  &#125;</div><div class="line">  System.out.println(Thread.currentThread().getName()+<span class="string">": start executing"</span>);    <span class="comment">// n个线程等待countDown == 0</span></div><div class="line">  &#125;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">new</span> Thread(()-&gt;&#123;</div><div class="line">  System.out.println(<span class="string">"start!!"</span>);  </div><div class="line">  cnt.countDown();   <span class="comment">//  count-1 </span></div><div class="line">&#125;).start();</div></pre></td></tr></table></figure>
+<h3 id="三、实现原理："><a href="#三、实现原理：" class="headerlink" title="三、实现原理："></a>三、实现原理：</h3><p>CountDownLatch 有一个内部的类成员Sync，是JDK1.5 中的AQS(AbstractQueuedSynchronizer) 这个抽象类的实现。</p>
+<p>这两个方法分别是获取共享锁和释放共享锁。重载了AQS的获取共享锁和释放锁的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">int</span> <span class="title">tryAcquireShared</span><span class="params">(<span class="keyword">int</span> acquires)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (getState() == <span class="number">0</span>) ? <span class="number">1</span> : -<span class="number">1</span>;    <span class="comment">//这里getState()拿到的就是我们队CDL赋的初值</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryReleaseShared</span><span class="params">(<span class="keyword">int</span> releases)</span> </span>&#123;</div><div class="line">    <span class="comment">// Decrement count; signal when transition to zero</span></div><div class="line">    <span class="keyword">for</span> (;;) &#123;</div><div class="line">        <span class="keyword">int</span> c = getState();</div><div class="line">        <span class="keyword">if</span> (c == <span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">int</span> nextc = c-<span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (compareAndSetState(c, nextc))   <span class="comment">//这里对state的更新使用CAS来判断是否有并发的修改</span></div><div class="line">            <span class="keyword">return</span> nextc == <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -386,6 +404,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/并发/" <i class="fa fa-tag"></i> 并发</a>
+          
+        </div>
+      
 
       
       
@@ -395,8 +419,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/21/Guava/" rel="next" title="Guava不可变集合类">
-                <i class="fa fa-chevron-left"></i> Guava不可变集合类
+              <a href="/2018/03/01/反射时Method为何可以通过子类拿到父类的私有方法/" rel="next" title="反射时Method为何可以通过子类拿到父类的私有方法">
+                <i class="fa fa-chevron-left"></i> 反射时Method为何可以通过子类拿到父类的私有方法
               </a>
             
           </div>
@@ -404,10 +428,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/17/Gradle 3.4 和Idea的一个Bug/" rel="prev" title="Gradle 3.4 与IDEA 的一个问题">
-                Gradle 3.4 与IDEA 的一个问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -541,7 +561,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#异步消息"><span class="nav-number">1.</span> <span class="nav-text">异步消息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.1.</span> <span class="nav-text">RabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.2.</span> <span class="nav-text">RabbitMQ Java api</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、CountDownLatch简介"><span class="nav-number">1.</span> <span class="nav-text">一、CountDownLatch简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、-应用示例："><span class="nav-number">2.</span> <span class="nav-text">二、 应用示例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、实现原理："><span class="nav-number">3.</span> <span class="nav-text">三、实现原理：</span></a></li></ol></div>
             
 
           </div>
