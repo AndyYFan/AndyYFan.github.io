@@ -100,7 +100,7 @@
 <meta property="og:url" content="https://andyyfan.github.io/2017/03/26/rabbitmq/index.html">
 <meta property="og:site_name" content="技术笔记">
 <meta property="og:description" content="异步消息异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的">
-<meta property="og:updated_time" content="2017-04-02T09:33:44.000Z">
+<meta property="og:updated_time" content="2018-03-06T13:39:06.184Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rabbitmq">
 <meta name="twitter:description" content="异步消息异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的">
@@ -349,7 +349,7 @@
 
       
         <hr>
-<h2 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h2><p>异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。<br>异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的消息通信。<br>queue确保每条消息有唯一的发送者和接收者，topic可以有多个消息接收者共同监听主题。<br>企业级的消息代理实现由JMS和AMQP两种规范，后者兼容JMS并且夸语言平台，所以AMQP得使用比较广泛，RabbitMQ是AMQP规范的一种消息代理实现。</p>
+<h2 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h2><p>异步消息是系统间通信的主要解决方案，主要解决消息发送和处理之间速率不匹配，消息产生者和消费者之间解耦。<br>异步消息中有两个概念：broker 和 destination，即代理和目的地。为了实现生产和消费之间的解耦，生产者将信息交给broker接管，然后代理负责转发到指定的目的地。目的地一般有两种形式：一种是队列，还有一种是主题。queue主要用于点对点消息通信，topic用于发布/订阅式的消息通信。<br>queue确保每条消息有唯一的发送者和接收者，topic可以有多个消息接收者共同监听主题。<br>企业级的消息代理实现由JMS和AMQP两种规范，后者兼容JMS并且夸语言平台，所以AMQP得使用比较广泛，RabbitMQ是AMQP规范的一种消息代理实现。<br><a id="more"></a></p>
 <p></p><h3>RabbitMQ</h3><br>RabbitMQ里也有上面说到的基本的异步消息概念，多做了一层抽象, 在Producer和queue之间, 加入了交换器 (Exchange)。使Producer和queue解耦，交换器根据调度策略把消息给队列。<br>从而衍生除了几个重要的概念:<p></p>
 <ul>
 <li>VirtualHost</li>
@@ -506,7 +506,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

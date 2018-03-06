@@ -102,7 +102,7 @@ controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM�
 <meta property="og:site_name" content="技术笔记">
 <meta property="og:description" content="angualr Js 的 controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。
 controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM操作，格式化数据的操作。控制器的正确操作是：将一个独立view相关的">
-<meta property="og:updated_time" content="2018-02-28T15:33:25.461Z">
+<meta property="og:updated_time" content="2018-03-06T13:39:32.737Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angualr_JS">
 <meta name="twitter:description" content="angualr Js 的 controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。
@@ -374,8 +374,7 @@ controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM�
 
       
         <p>angualr Js 的 controller从使用上来说，可以看做是一个增强的view。在声明一个controller之后，会绑定一个默认的$scope。<br>如果一个controller太庞大，或者在$scope下绑定了太多的值，会导致性能的下降。</p>
-<p>controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM操作，格式化数据的操作。<br>控制器的正确操作是：将一个独立view相关的业务操作封装在一起，具体的业务操作可以封装在service里，然后通过依赖注入进来。<br>这样控制器可以随时销毁。</p>
-<p>在绑定关于在$scope上绑定数据的时候，一些注意事项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1：</div><div class="line">   $scope.data = 10;</div><div class="line"></div><div class="line">2：</div><div class="line">   $scope.model = &#123;</div><div class="line">       data : 10</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM操作，格式化数据的操作。<br>控制器的正确操作是：将一个独立view相关的业务操作封装在一起，具体的业务操作可以封装在service里，然后通过依赖注入进来。<br>这样控制器可以随时销毁。<br><a id="more"></a><br>在绑定关于在$scope上绑定数据的时候，一些注意事项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1：</div><div class="line">   $scope.data = 10;</div><div class="line"></div><div class="line">2：</div><div class="line">   $scope.model = &#123;</div><div class="line">       data : 10</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
 <p>1是错误的做法，考虑一个场景：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// JS </div><div class="line">angular.module(&apos;myApp&apos;,[])</div><div class="line">       .controller(&apos;parentCtrl&apos;,ParentController);</div><div class="line">       .controller(&apos;childCtrl&apos;,ChildController);</div><div class="line">// ....</div><div class="line">function ParentController($scope)&#123;</div><div class="line">    $scope.name = 10;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">//....     </div><div class="line"></div><div class="line">function ChildController($scope)&#123;</div><div class="line">    $scope.name = 20;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>在html中定义了两个控制器，childCtrl是parentCtrl 的子controller，child 的值parent的值绑定。<br>但是改变parent之后，并不会影响child的值。<br>这是由于JavaScript中对于基本数据类型采用了值拷贝的方式，<br>如果需要维持这种数据绑定关系，那么在AngularJs中就不能将数据类型声明为基本数据类型。<br>所以在这里把name声明成一个对象，就可以在上下文中通过引用拷贝修改这个对象的属性。</p>
 <p>对于angular的service也有一些值得注意的地方。<br>首先是service 的生存周期问题，service 是一个Singleton的对象。<br>对于一个webapp，只会被$injector实例化一次。这个service的加载概念有点类似于Spring里的DI，不过<br>在angular里叫做 懒加载，其实和DI是一回事情。</p>
@@ -510,7 +509,7 @@ controller只是一个view和$scope之间的桥梁。 不适合用来执行DOM�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

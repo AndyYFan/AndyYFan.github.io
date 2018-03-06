@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="技术笔记">
 <meta property="og:description" content="当在DAO中使用Hibernate，JPA，JDO时，要处理一些持久层技术的原生异常类型，比如HibernateException,PersistenceException,JDOException，取决于使用哪种持久层技术。这些运行时的异常不用声明或者catch。Spring提供了一种透明的异常类型转译的方法，通过@Repository注解。
 1234@Repositorypublic clas">
-<meta property="og:updated_time" content="2017-03-22T09:10:46.000Z">
+<meta property="og:updated_time" content="2018-03-06T13:39:13.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Exception translation">
 <meta name="twitter:description" content="当在DAO中使用Hibernate，JPA，JDO时，要处理一些持久层技术的原生异常类型，比如HibernateException,PersistenceException,JDOException，取决于使用哪种持久层技术。这些运行时的异常不用声明或者catch。Spring提供了一种透明的异常类型转译的方法，通过@Repository注解。
@@ -353,6 +353,7 @@
       
         <p>当在DAO中使用Hibernate，JPA，JDO时，要处理一些持久层技术的原生异常类型，比如<code>HibernateException</code>,<code>PersistenceException</code>,<code>JDOException</code>，取决于使用哪种持久层技术。这些运行时的异常不用声明或者catch。Spring提供了一种透明的异常类型转译的方法，通过<code>@Repository</code>注解。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Repository</div><div class="line">public class ProductDaoImpl implements ProductDao &#123;</div><div class="line">   // class body here...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;beans&gt;</div><div class="line"></div><div class="line">   &lt;!-- Exception translation bean post processor --&gt;</div><div class="line">   &lt;bean class=&quot;org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor&quot;/&gt;</div><div class="line"></div><div class="line">   &lt;bean id=&quot;myProductDao&quot; class=&quot;product.ProductDaoImpl&quot;/&gt;</div><div class="line"></div><div class="line">&lt;/beans&gt;</div></pre></td></tr></table></figure>
 <p>预处理器<code>ersistenceExceptionTranslationPostProcessor</code>会自动的扫描到所有的异常转译类，这些类都实现了<code>PersistenceExceptionTranslator</code>接口，并且会根据<code>@Repository</code>注解的DAO类的抛出异常选择恰当的异常处理方式。</p>
 <p>当然我们可以不用选择定制直接使用原本的exception translator，但这对理解Spring的ORM技术是有帮助的。</p>
@@ -482,7 +483,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

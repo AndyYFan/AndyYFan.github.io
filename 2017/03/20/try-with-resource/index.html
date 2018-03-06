@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -104,7 +104,7 @@ Java中关闭资源的方式：
 <meta property="og:description" content="##Java中关闭资源的正常方式&amp;amp; try with resource
 Java中关闭资源的方式：
 123456789101112131415161718192021//不正确的做法：private void readTheFile() throws IOException &amp;#123;  Path path = Paths.get(this.fileName);  BufferedRea">
-<meta property="og:updated_time" content="2017-03-20T08:18:29.000Z">
+<meta property="og:updated_time" content="2018-03-06T13:38:38.357Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="try with resource">
 <meta name="twitter:description" content="##Java中关闭资源的正常方式&amp;amp; try with resource
@@ -357,8 +357,7 @@ Java中关闭资源的方式：
         <p>##Java中关闭资源的正常方式&amp; try with resource</p>
 <p>Java中关闭资源的方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//不正确的做法：</div><div class="line">private void readTheFile() throws IOException &#123;</div><div class="line">  Path path = Paths.get(this.fileName);</div><div class="line">  BufferedReader reader = Files.newBufferedReader(path, this.charset)) &#123;</div><div class="line">  // ...</div><div class="line">  reader.close();  // Noncompliant</div><div class="line">&#125;</div><div class="line"></div><div class="line">private void doSomething() &#123;</div><div class="line">  OutputStream stream = null;</div><div class="line">  try &#123;</div><div class="line">    for (String property : propertyList) &#123;</div><div class="line">      stream = new FileOutputStream(&quot;myfile.txt&quot;);  // Noncompliant</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    stream.close(); </div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在循环中打开了多个流，但是只有最后一个是被正确关闭的。</p>
-<p>正确的做法：</p>
+<p>在循环中打开了多个流，但是只有最后一个是被正确关闭的。<br><a id="more"></a><br>正确的做法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">private void readTheFile() throws IOException &#123;</div><div class="line">  Path path = Paths.get(this.fileName);</div><div class="line">  BufferedReader reader = null;</div><div class="line">  try &#123;</div><div class="line">    reader = Files.newBufferedReader(path, this.charset)) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    if (reader != null) &#123;</div><div class="line">      reader.close();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">private void doSomething() &#123;</div><div class="line">  OutputStream stream = null;</div><div class="line">  try &#123;</div><div class="line">    stream = new FileOutputStream(&quot;myfile.txt&quot;);</div><div class="line">    for (String property : propertyList) &#123;</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    stream.close();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在Java7 中还有一种try with resource 的写法， 更紧凑一些， 可以通过try()请求资源，这个资源可以不用显示的声明关闭：</p>
@@ -377,6 +376,12 @@ Java中关闭资源的方式：
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" <i class="fa fa-tag"></i> java</a>
+          
+        </div>
       
 
       
@@ -489,7 +494,7 @@ Java中关闭资源的方式：
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

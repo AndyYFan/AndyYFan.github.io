@@ -97,8 +97,7 @@
 <meta name="description" content="一、CountDownLatch简介CountDownLatch(CDL)是idk 1.5 中的java 并发同步类， 可以控制多线程在某个计数器为零前通过await()阻塞线程。CDL中主要方法包括 
 1. 获取当前计数的get方法
 2. 对象初始化的方法（因为没有set方法，countDown值为0后方法不能重用）
-3. countDown方法，将当前的计数器减1.
-二、 应用示例：12345">
+3. countDown方法，将当前的计数器减1.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CountDownLatch">
 <meta property="og:url" content="https://andyyfan.github.io/2018/03/01/Java并发工具类（一）/Java并发工具类（一）/index.html">
@@ -106,16 +105,14 @@
 <meta property="og:description" content="一、CountDownLatch简介CountDownLatch(CDL)是idk 1.5 中的java 并发同步类， 可以控制多线程在某个计数器为零前通过await()阻塞线程。CDL中主要方法包括 
 1. 获取当前计数的get方法
 2. 对象初始化的方法（因为没有set方法，countDown值为0后方法不能重用）
-3. countDown方法，将当前的计数器减1.
-二、 应用示例：12345">
-<meta property="og:updated_time" content="2018-03-03T13:05:56.028Z">
+3. countDown方法，将当前的计数器减1.">
+<meta property="og:updated_time" content="2018-03-06T13:39:49.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CountDownLatch">
 <meta name="twitter:description" content="一、CountDownLatch简介CountDownLatch(CDL)是idk 1.5 中的java 并发同步类， 可以控制多线程在某个计数器为零前通过await()阻塞线程。CDL中主要方法包括 
 1. 获取当前计数的get方法
 2. 对象初始化的方法（因为没有set方法，countDown值为0后方法不能重用）
-3. countDown方法，将当前的计数器减1.
-二、 应用示例：12345">
+3. countDown方法，将当前的计数器减1.">
 
 
 
@@ -385,7 +382,7 @@
         <h3 id="一、CountDownLatch简介"><a href="#一、CountDownLatch简介" class="headerlink" title="一、CountDownLatch简介"></a>一、CountDownLatch简介</h3><p>CountDownLatch(CDL)是idk 1.5 中的java 并发同步类， 可以控制多线程在某个计数器为零前通过await()阻塞线程。CDL中主要方法包括 </p>
 <p>1. 获取当前计数的get方法</p>
 <p>2. 对象初始化的方法（因为没有set方法，countDown值为0后方法不能重用）</p>
-<p>3. countDown方法，将当前的计数器减1.</p>
+<p>3. countDown方法，将当前的计数器减1.<br><a id="more"></a></p>
 <h3 id="二、-应用示例："><a href="#二、-应用示例：" class="headerlink" title="二、 应用示例："></a>二、 应用示例：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * </div><div class="line"> * 👇下面是使用countDownLatch的一个示例，得到的输出为：</div><div class="line">start!!</div><div class="line">work-thread-0: start executing</div><div class="line">work-thread-3: start executing</div><div class="line">work-thread-4: start executing</div><div class="line">work-thread-1: start executing</div><div class="line">work-thread-2: start executing</div><div class="line"> * */</div><div class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</div><div class="line">ThreadFactory threadFactory = <span class="keyword">new</span> ThreadFactoryBuilder().setNameFormat(<span class="string">"work-thread-%d"</span>).build();</div><div class="line">ExecutorService service = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">5</span>,<span class="number">5</span>,</div><div class="line">  <span class="number">1000L</span>,TimeUnit.MILLISECONDS,</div><div class="line">  <span class="keyword">new</span> LinkedBlockingQueue(<span class="number">10</span>),</div><div class="line">  threadFactory);</div><div class="line">CountDownLatch cnt = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);   <span class="comment">//设置了一个初始计数为1的CDL</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">  service.execute(() -&gt; &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">  cnt.await();</div><div class="line">  &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">  e.printStackTrace();</div><div class="line">  &#125;</div><div class="line">  System.out.println(Thread.currentThread().getName()+<span class="string">": start executing"</span>);    <span class="comment">// n个线程等待countDown == 0</span></div><div class="line">  &#125;</div><div class="line">  );</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">new</span> Thread(()-&gt;&#123;</div><div class="line">  System.out.println(<span class="string">"start!!"</span>);  </div><div class="line">  cnt.countDown();   <span class="comment">//  count-1 </span></div><div class="line">&#125;).start();</div></pre></td></tr></table></figure>
 <h3 id="三、实现原理："><a href="#三、实现原理：" class="headerlink" title="三、实现原理："></a>三、实现原理：</h3><p>CountDownLatch 有一个内部的类成员Sync，是JDK1.5 中的AQS(AbstractQueuedSynchronizer) 这个抽象类的实现。</p>
 <p>这两个方法分别是获取共享锁和释放共享锁。重载了AQS的获取共享锁和释放锁的方法。</p>
@@ -526,7 +523,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
