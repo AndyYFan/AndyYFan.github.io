@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="docker," />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -94,22 +94,28 @@
 
 
 
-<meta name="description" content="##Docker环境配置
-Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同，Docker直接运行在操作系统之上，而不是硬件层。虽然是操作系统层上的虚拟机实现，但是也实现了资源隔离，同时也因此具有比较好的性能，一般来说，容器的启动一般在1秒左右。
-123456789101112docker:container   Manage containersimage       Manage">
+<meta name="description" content="当我们暴力匹配的时候，如果在某一位不匹配，我们会在字符串的下一个初始位置尝试匹配模式串。
+kmp算法优化了失配时的处理策略， 如果字符串在i位和模式串j位不相符，
+那么我们可以得到的信息是：模式串的0~j-1位是和字符串的i-j ~i-1 位是匹配的，
+我们把这部分字符串叫做u (0~j-1)
+如果我们可以找到在这个字符串u中是否有一部分x~j-1 和 0 ~ y 是一样的，那么我们可以从y+1位">
 <meta property="og:type" content="article">
-<meta property="og:title" content="docker 环境配置">
-<meta property="og:url" content="https://andyyfan.github.io/2017/03/19/docker-环境配置/index.html">
+<meta property="og:title" content="KMP">
+<meta property="og:url" content="https://andyyfan.github.io/2018/03/29/KMP/KMP/index.html">
 <meta property="og:site_name" content="技术笔记">
-<meta property="og:description" content="##Docker环境配置
-Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同，Docker直接运行在操作系统之上，而不是硬件层。虽然是操作系统层上的虚拟机实现，但是也实现了资源隔离，同时也因此具有比较好的性能，一般来说，容器的启动一般在1秒左右。
-123456789101112docker:container   Manage containersimage       Manage">
-<meta property="og:updated_time" content="2018-03-06T13:39:26.379Z">
+<meta property="og:description" content="当我们暴力匹配的时候，如果在某一位不匹配，我们会在字符串的下一个初始位置尝试匹配模式串。
+kmp算法优化了失配时的处理策略， 如果字符串在i位和模式串j位不相符，
+那么我们可以得到的信息是：模式串的0~j-1位是和字符串的i-j ~i-1 位是匹配的，
+我们把这部分字符串叫做u (0~j-1)
+如果我们可以找到在这个字符串u中是否有一部分x~j-1 和 0 ~ y 是一样的，那么我们可以从y+1位">
+<meta property="og:updated_time" content="2018-03-29T15:04:21.232Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="docker 环境配置">
-<meta name="twitter:description" content="##Docker环境配置
-Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同，Docker直接运行在操作系统之上，而不是硬件层。虽然是操作系统层上的虚拟机实现，但是也实现了资源隔离，同时也因此具有比较好的性能，一般来说，容器的启动一般在1秒左右。
-123456789101112docker:container   Manage containersimage       Manage">
+<meta name="twitter:title" content="KMP">
+<meta name="twitter:description" content="当我们暴力匹配的时候，如果在某一位不匹配，我们会在字符串的下一个初始位置尝试匹配模式串。
+kmp算法优化了失配时的处理策略， 如果字符串在i位和模式串j位不相符，
+那么我们可以得到的信息是：模式串的0~j-1位是和字符串的i-j ~i-1 位是匹配的，
+我们把这部分字符串叫做u (0~j-1)
+如果我们可以找到在这个字符串u中是否有一部分x~j-1 和 0 ~ y 是一样的，那么我们可以从y+1位">
 
 
 
@@ -138,13 +144,13 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
 
 
 
-  <link rel="canonical" href="https://andyyfan.github.io/2017/03/19/docker-环境配置/"/>
+  <link rel="canonical" href="https://andyyfan.github.io/2018/03/29/KMP/KMP/"/>
 
 
 
 
 
-  <title>docker 环境配置 | 技术笔记</title>
+  <title>KMP | 技术笔记</title>
   
 
 
@@ -287,7 +293,7 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://andyyfan.github.io/2017/03/19/docker-环境配置/">
+    <link itemprop="mainEntityOfPage" href="https://andyyfan.github.io/2018/03/29/KMP/KMP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yunyi fan">
@@ -304,7 +310,7 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
 
         
         
-          <h1 class="post-title" itemprop="name headline">docker 环境配置</h1>
+          <h1 class="post-title" itemprop="name headline">KMP</h1>
         
 
         <div class="post-meta">
@@ -316,8 +322,8 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-19T12:24:02+08:00">
-                2017-03-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T23:36:20+08:00">
+                2018-03-29
               </time>
             
 
@@ -326,6 +332,28 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -354,23 +382,33 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
       
 
       
-        <p>##Docker环境配置</p>
-<p>Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同，Docker直接运行在操作系统之上，而不是硬件层。<br>虽然是操作系统层上的虚拟机实现，但是也实现了资源隔离，同时也因此具有比较好的性能，一般来说，容器的启动一般在1秒左右。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">docker:</div><div class="line">container   Manage containers</div><div class="line">image       Manage images</div><div class="line">network     Manage networks</div><div class="line">node        Manage Swarm nodes</div><div class="line">plugin      Manage plugins</div><div class="line">secret      Manage Docker secrets</div><div class="line">service     Manage services</div><div class="line">stack       Manage Docker stacks</div><div class="line">swarm       Manage Swarm</div><div class="line">system      Manage Docker</div><div class="line">volume      Manage volumes</div></pre></td></tr></table></figure>
-<p>OSX下可以下载到最新的<a href="src=&quot;https://www.docker.com/docker-mac&quot;">docker</a><br><a id="more"></a><br>docker具有统一管理的镜像仓库，支持将软件编译成一个image，在image中进行配置后发布，使用者可以通过从repository中下载镜像。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker pull  image-name     </div><div class="line">docker push  image-name</div></pre></td></tr></table></figure></p>
-<p>可以上传和下载仓库中的镜像。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker search redis</div></pre></td></tr></table></figure>
-<p>从远程仓库搜索redis 镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NAME      DESCRIPTION      STARS     OFFICIAL   AUTOMATED</div><div class="line">redis      Redis is...     3516      [OK]</div></pre></td></tr></table></figure>
-<p>下载官方镜像：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull redis</div></pre></td></tr></table></figure>
-<p>删除镜像：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker rmi image-id</div></pre></td></tr></table></figure>
-<p>通过  docker run [image-name] 可以根据镜像启动一个容器，容器是镜像的一个实例，在启动时可以指定容器名，可以查看已经启动的容器<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name myredis -d -P redis</div></pre></td></tr></table></figure></p>
-<p>-d 表示<figure class="highlight plain"><figcaption><span>[host-port]:[container-port]```来进行端口映射。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
-<p>docker ps [-a]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">可以查看容器，默认只显示运行中的容器。 如果没有前台进程，那么容器就会自动退出。也可以通过```stop```指令停止容器,```rm```可以删除一个已停止的容器，如果想强制退出，可以用```docker rm -f</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker stop [container-name]/[container-id]</div><div class="line">docker rm [container-name]/[container-id]</div></pre></td></tr></table></figure>
-
+        <p>当我们暴力匹配的时候，如果在某一位不匹配，我们会在字符串的下一个初始位置尝试匹配模式串。</p>
+<p>kmp算法优化了失配时的处理策略， 如果字符串在i位和模式串j位不相符，</p>
+<p>那么我们可以得到的信息是：模式串的0~j-1位是和字符串的i-j ~i-1 位是匹配的，</p>
+<p>我们把这部分字符串叫做u (0~j-1)</p>
+<p>如果我们可以找到在这个字符串u中是否有一部分x~j-1 和 0 ~ y 是一样的，那么我们可以从y+1位开始和i开始匹配。</p>
+<p>我们可以通过事先计算好模式串的各个子串的满足这个条件的y，也就是最大的前缀和后缀相等的部分。</p>
+<a id="more"></a>
+<p>kmp算法的主要就是求解模式串 0~j 子串的最大相同前后缀过程。</p>
+<p>最大共同前后缀长度数组next的求法可以理解为：</p>
+<p>next[i] = 字符串的前缀 与它前i个值（不包括首字母）的最大匹配长度</p>
+<p>首先第一个next 值为-1 next[0] = -1</p>
+<p>a b a b a b c </p>
+<p> a b a b a b c next[1] = 0</p>
+<p>和 b 的匹配长度为0</p>
+<p>a b a b a b c </p>
+<p> a b a b a b c next[2] = 1</p>
+<p>和 ba 的匹配长度为1</p>
+<p>a b a b a b c </p>
+<p> a b a b a b c next[3] = 2</p>
+<p>如果i+1个字母相同，则next值+1</p>
+<p>a b a b a b c </p>
+<p> a b a b a b c next[4] = 3</p>
+<p>a b a b a b c </p>
+<p> a b a b a b c next[5] = 4</p>
+<p>a b a b a b c </p>
+<p> a b a b a b c next[6] = 0</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[] getNext(<span class="keyword">char</span>[] p) &#123;</div><div class="line">  <span class="keyword">int</span>[] next = <span class="keyword">new</span> <span class="keyword">int</span>[p.length];</div><div class="line">  next[<span class="number">0</span>] = -<span class="number">1</span>;</div><div class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">  <span class="keyword">int</span> j = -<span class="number">1</span>;</div><div class="line">  <span class="keyword">while</span> (i &lt; p.length-<span class="number">1</span>) &#123;</div><div class="line">      <span class="keyword">if</span> (j == -<span class="number">1</span> || p[i] == p[j]) &#123;</div><div class="line">          ++i;</div><div class="line">          ++j;</div><div class="line">          next[i] = j;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">          j = next[j];</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> next;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">KMP</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">char</span>[] pat)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span>[] next = getNext(pat);</div><div class="line">  <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">  <span class="keyword">int</span> j = <span class="number">0</span>;</div><div class="line">  <span class="keyword">while</span> (i &lt; str.length &amp;&amp; j &lt; str.length) &#123;</div><div class="line">      <span class="keyword">if</span> (j == -<span class="number">1</span> || str[i] == pat[j]) &#123;</div><div class="line">          i++;</div><div class="line">          j++;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">          j = next[j];</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> j == pat.length ? i - j : -<span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -387,7 +425,7 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
       
         <div class="post-tags">
           
-            <a href="/tags/docker/" <i class="fa fa-tag"></i> docker</a>
+            <a href="/tags/算法/" <i class="fa fa-tag"></i> 算法</a>
           
         </div>
       
@@ -400,8 +438,8 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/17/angular学习/" rel="next" title="angualr_JS">
-                <i class="fa fa-chevron-left"></i> angualr_JS
+              <a href="/2018/03/09/RSA加密/RSA加密/" rel="next" title="RSA加密">
+                <i class="fa fa-chevron-left"></i> RSA加密
               </a>
             
           </div>
@@ -409,10 +447,6 @@ Docker是一个轻量级的容器技术,和传统的虚拟机技术有所不同�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/20/try-with-resource/" rel="prev" title="try with resource">
-                try with resource <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
