@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="java," />
+  <meta name="keywords" content="mybatis," />
 
 
 
@@ -94,22 +94,34 @@
 
 
 
-<meta name="description" content="##Java中关闭资源的正常方式&amp;amp; try with resource
-Java中关闭资源的方式：
-123456789101112131415161718192021//不正确的做法：private void readTheFile() throws IOException &amp;#123;  Path path = Paths.get(this.fileName);  BufferedRea">
+<meta name="description" content="之前升级了一个老系统中的mybatis版本（3.1.0），遇到了一个兼容性问题。
+在3.1.0版本之前 sql中需要映射多个参数，支持这种写法
+Dao层：
+C selectByAAndB(String a, String b);
+Mapper：
+select * from table where a = #{0} and b = #{1}
+mybatis 可以通过这种方式顺序索引多参数，但是在新版">
 <meta property="og:type" content="article">
-<meta property="og:title" content="try with resource">
-<meta property="og:url" content="https://andyyfan.github.io/2017/03/20/try-with-resource/index.html">
+<meta property="og:title" content="Mybatis 的一个兼容性问题">
+<meta property="og:url" content="https://andyyfan.github.io/2017/11/29/MyBatis 的一个版本兼容性问题/MyBatis 的一个版本兼容性问题/index.html">
 <meta property="og:site_name" content="技术笔记">
-<meta property="og:description" content="##Java中关闭资源的正常方式&amp;amp; try with resource
-Java中关闭资源的方式：
-123456789101112131415161718192021//不正确的做法：private void readTheFile() throws IOException &amp;#123;  Path path = Paths.get(this.fileName);  BufferedRea">
-<meta property="og:updated_time" content="2018-03-06T13:38:38.357Z">
+<meta property="og:description" content="之前升级了一个老系统中的mybatis版本（3.1.0），遇到了一个兼容性问题。
+在3.1.0版本之前 sql中需要映射多个参数，支持这种写法
+Dao层：
+C selectByAAndB(String a, String b);
+Mapper：
+select * from table where a = #{0} and b = #{1}
+mybatis 可以通过这种方式顺序索引多参数，但是在新版">
+<meta property="og:updated_time" content="2018-03-30T14:07:04.384Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="try with resource">
-<meta name="twitter:description" content="##Java中关闭资源的正常方式&amp;amp; try with resource
-Java中关闭资源的方式：
-123456789101112131415161718192021//不正确的做法：private void readTheFile() throws IOException &amp;#123;  Path path = Paths.get(this.fileName);  BufferedRea">
+<meta name="twitter:title" content="Mybatis 的一个兼容性问题">
+<meta name="twitter:description" content="之前升级了一个老系统中的mybatis版本（3.1.0），遇到了一个兼容性问题。
+在3.1.0版本之前 sql中需要映射多个参数，支持这种写法
+Dao层：
+C selectByAAndB(String a, String b);
+Mapper：
+select * from table where a = #{0} and b = #{1}
+mybatis 可以通过这种方式顺序索引多参数，但是在新版">
 
 
 
@@ -138,13 +150,13 @@ Java中关闭资源的方式：
 
 
 
-  <link rel="canonical" href="https://andyyfan.github.io/2017/03/20/try-with-resource/"/>
+  <link rel="canonical" href="https://andyyfan.github.io/2017/11/29/MyBatis 的一个版本兼容性问题/MyBatis 的一个版本兼容性问题/"/>
 
 
 
 
 
-  <title>try with resource | 技术笔记</title>
+  <title>Mybatis 的一个兼容性问题 | 技术笔记</title>
   
 
 
@@ -287,7 +299,7 @@ Java中关闭资源的方式：
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://andyyfan.github.io/2017/03/20/try-with-resource/">
+    <link itemprop="mainEntityOfPage" href="https://andyyfan.github.io/2017/11/29/MyBatis 的一个版本兼容性问题/MyBatis 的一个版本兼容性问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yunyi fan">
@@ -304,7 +316,7 @@ Java中关闭资源的方式：
 
         
         
-          <h1 class="post-title" itemprop="name headline">try with resource</h1>
+          <h1 class="post-title" itemprop="name headline">Mybatis 的一个兼容性问题</h1>
         
 
         <div class="post-meta">
@@ -316,8 +328,8 @@ Java中关闭资源的方式：
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T15:13:37+08:00">
-                2017-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T22:50:28+08:00">
+                2017-11-29
               </time>
             
 
@@ -326,6 +338,28 @@ Java中关闭资源的方式：
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/项目/" itemprop="url" rel="index">
+                    <span itemprop="name">项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -354,15 +388,19 @@ Java中关闭资源的方式：
       
 
       
-        <p>##Java中关闭资源的正常方式&amp; try with resource</p>
-<p>Java中关闭资源的方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//不正确的做法：</div><div class="line">private void readTheFile() throws IOException &#123;</div><div class="line">  Path path = Paths.get(this.fileName);</div><div class="line">  BufferedReader reader = Files.newBufferedReader(path, this.charset)) &#123;</div><div class="line">  // ...</div><div class="line">  reader.close();  // Noncompliant</div><div class="line">&#125;</div><div class="line"></div><div class="line">private void doSomething() &#123;</div><div class="line">  OutputStream stream = null;</div><div class="line">  try &#123;</div><div class="line">    for (String property : propertyList) &#123;</div><div class="line">      stream = new FileOutputStream(&quot;myfile.txt&quot;);  // Noncompliant</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    stream.close(); </div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在循环中打开了多个流，但是只有最后一个是被正确关闭的。<br><a id="more"></a><br>正确的做法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">private void readTheFile() throws IOException &#123;</div><div class="line">  Path path = Paths.get(this.fileName);</div><div class="line">  BufferedReader reader = null;</div><div class="line">  try &#123;</div><div class="line">    reader = Files.newBufferedReader(path, this.charset)) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    if (reader != null) &#123;</div><div class="line">      reader.close();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">private void doSomething() &#123;</div><div class="line">  OutputStream stream = null;</div><div class="line">  try &#123;</div><div class="line">    stream = new FileOutputStream(&quot;myfile.txt&quot;);</div><div class="line">    for (String property : propertyList) &#123;</div><div class="line">      // ...</div><div class="line">    &#125;</div><div class="line">  &#125; catch (Exception e) &#123;</div><div class="line">    // ...</div><div class="line">  &#125; finally &#123;</div><div class="line">    stream.close();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在Java7 中还有一种try with resource 的写法， 更紧凑一些， 可以通过try()请求资源，这个资源可以不用显示的声明关闭：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">try(JedisPool pool = new JedisPool(</div><div class="line">	new JedisPoolConfig(),</div><div class="line">	 &quot;localhost&quot;))&#123;</div><div class="line">            try (Jedis jedis = pool.getResource()) &#123;</div><div class="line">            //...</div><div class="line">  			&#125;</div><div class="line">            pool.destroy();</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-
+        <p>之前升级了一个老系统中的mybatis版本（3.1.0），遇到了一个兼容性问题。</p>
+<p>在3.1.0版本之前 sql中需要映射多个参数，支持这种写法</p>
+<p>Dao层：</p>
+<p>C selectByAAndB(String a, String b);</p>
+<p>Mapper：</p>
+<p>select * from table where a = #{0} and b = #{1}</p>
+<p>mybatis 可以通过这种方式顺序索引多参数，但是在新版本中（3.4.1）之后，这种方式不再被支持了。</p>
+<p>见 <a href="https://github.com/mybatis/mybatis-3/issues/1122" target="_blank" rel="external">https://github.com/mybatis/mybatis-3/issues/1122</a></p>
+<p>在3.4.1 版本之后，mybatis的 默认开启了配置选项</p>
+<p>useActualParamName = true<br><a id="more"></a><br>在mybatis 源码中（3.4.2），对于方法的入参处理中，优先处理通过注解@Param声明的参数，</p>
+<p>如果没有通过注解声明，由于useActualParamName 为true，</p>
+<p>会通过getActualParamName来进行参数解析</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ParamNameResolver</span><span class="params">(Configuration config, Method method)</span> </span>&#123;</div><div class="line">  <span class="keyword">final</span> Class&lt;?&gt;[] paramTypes = method.getParameterTypes();</div><div class="line">  <span class="keyword">final</span> Annotation[][] paramAnnotations = method.getParameterAnnotations();</div><div class="line">  <span class="keyword">final</span> SortedMap&lt;Integer, String&gt; map = <span class="keyword">new</span> TreeMap&lt;Integer, String&gt;();</div><div class="line">  <span class="keyword">int</span> paramCount = paramAnnotations.length;</div><div class="line">  <span class="comment">// get names from @Param annotations</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> paramIndex = <span class="number">0</span>; paramIndex &lt; paramCount; paramIndex++) &#123;</div><div class="line">    <span class="keyword">if</span> (isSpecialParameter(paramTypes[paramIndex])) &#123;</div><div class="line">      <span class="comment">// skip special parameters</span></div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line">    String name = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">for</span> (Annotation annotation : paramAnnotations[paramIndex]) &#123;</div><div class="line">      <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Param) &#123;</div><div class="line">        hasParamAnnotation = <span class="keyword">true</span>;</div><div class="line">        name = ((Param) annotation).value();</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="comment">// @Param was not specified.</span></div><div class="line">      <span class="keyword">if</span> (config.isUseActualParamName()) &#123;</div><div class="line">        name = getActualParamName(method, paramIndex);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">if</span> (name == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="comment">// use the parameter index as the name ("0", "1", ...)</span></div><div class="line">        <span class="comment">// gcode issue #71</span></div><div class="line">        name = String.valueOf(map.size());</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    map.put(paramIndex, name);</div><div class="line">  &#125;</div><div class="line">  names = Collections.unmodifiableSortedMap(map);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -379,7 +417,7 @@ Java中关闭资源的方式：
       
         <div class="post-tags">
           
-            <a href="/tags/java/" <i class="fa fa-tag"></i> java</a>
+            <a href="/tags/mybatis/" <i class="fa fa-tag"></i> mybatis</a>
           
         </div>
       
@@ -392,8 +430,8 @@ Java中关闭资源的方式：
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/19/docker-环境配置/" rel="next" title="docker 环境配置">
-                <i class="fa fa-chevron-left"></i> docker 环境配置
+              <a href="/2017/09/17/Gradle 3.4 和Idea的一个Bug/" rel="next" title="Gradle 3.4 与IDEA 的一个问题">
+                <i class="fa fa-chevron-left"></i> Gradle 3.4 与IDEA 的一个问题
               </a>
             
           </div>
@@ -402,8 +440,8 @@ Java中关闭资源的方式：
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/20/redis/" rel="prev" title="Redis 初学">
-                Redis 初学 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/11/Leetcode 11. Container With Most Water/Leetcode 11. Container With Most Water/" rel="prev" title="Container With Most Water">
+                Container With Most Water <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
